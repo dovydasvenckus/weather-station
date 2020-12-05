@@ -10,6 +10,19 @@ SELECT * FROM weather
 WHERE date > ? AND ? > date
 """
 
+class WeatherData:
+  def __init__(self, date, temperature, humidity):
+    self.date = date
+    self.temperature = temperature
+    self.humidity = humidity
+  
+  def serialize(self):
+    return {
+      'date': self.date,
+      'temperature': self.temperature,
+      'humidity': self.humidity
+    }
+
 @app.route('/api/weather', methods=['GET'])
 def weather():
   DB_CONNECTION = sqlite3.connect('../weather-grabber/weather.db')
@@ -20,8 +33,10 @@ def weather():
   cursor.execute(WEATHER_QUERY, (yesterday, now))
   data = cursor.fetchall()
   DB_CONNECTION.close()
-  
-  response = jsonify(data)
+
+  mapped_data = [WeatherData(row[0], row[1], row[2]).serialize() for row in data]
+
+  response = jsonify({'weather': mapped_data})
   response.headers.add("Access-Control-Allow-Origin", "*")
   return response
 
