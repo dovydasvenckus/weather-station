@@ -20,6 +20,9 @@ def weather():
   cursor.execute(WEATHER_QUERY, (yesterday, now))
   data = cursor.fetchall()
   DB_CONNECTION.close()
-  return jsonify(data)
+  
+  response = jsonify(data)
+  response.headers.add("Access-Control-Allow-Origin", "*")
+  return response
 
 app.run()
