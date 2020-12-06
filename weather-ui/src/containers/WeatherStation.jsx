@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import weatherApi from '../api/weatherApi'
 import WeatherChart from '../components/WeatherChart'
+import bulma from 'bulma'
 
 const WeatherStation = () => {
   const [weatherData, setWeather] = useState({entries: undefined})
@@ -11,8 +12,8 @@ const WeatherStation = () => {
   });
 
   return (
-  <div>
-    <h1>Weather Station</h1>
+  <div className="container">
+    <h1 className="title">Weather Station</h1>
     <WeatherChart weatherEntries={weatherData.entries}/>
   </div>
   )
