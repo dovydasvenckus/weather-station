@@ -1,3 +1,6 @@
+# UI
+node_modules
+
 # Database
 *.db
 # Byte-compiled / optimized / DLL files
