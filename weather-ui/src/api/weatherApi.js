@@ -1,5 +1,7 @@
 import axios from "axios";
 
-const getWeather = () => axios.get("http://localhost:5000/api/weather")
+const apiUrl = process.env.API_URL;
+
+const getWeather = () => axios.get(apiUrl)
 
 export default { getWeather };

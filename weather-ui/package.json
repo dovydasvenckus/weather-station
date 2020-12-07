@@ -6,10 +6,11 @@
   "author": "Dovydas Venckus",
   "license": "GPL2.0",
   "scripts": {
-    "start": "parcel src/index.html --open"
+    "start": "parcel src/index.html --open",
+    "build": "NODE_ENV=prod parcel build src/index.html"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.0.0-0",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "parcel-bundler": "^1.12.4",
