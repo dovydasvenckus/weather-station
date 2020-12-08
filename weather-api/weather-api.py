@@ -25,7 +25,7 @@ class WeatherData:
       'humidity': self.humidity
     }
 
-@app.route('/api/weather', methods=['GET'])
+@app.route('/weather', methods=['GET'])
 def weather():
   DB_CONNECTION = sqlite3.connect('../weather-grabber/weather.db')
   cursor = DB_CONNECTION.cursor()
