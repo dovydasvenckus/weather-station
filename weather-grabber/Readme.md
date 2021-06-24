@@ -3,6 +3,15 @@
 Small **Python 3** script for retrieving temperature and humidity from **DH22** sensor.
 It persists timestamp, temperature and humidity inside **sqlite** database.
 
+## Wiring
+
+![wiring-diagram](wiring-diagram.png "Wiring diagram")
+
+- Place 10K resistor between DHT22 sensors **Pin 1** and **Pin 2**
+- Wire DHT22 sensors **Pin 1** to Raspberry PI **Pin 1 (3V3)**
+- Wire DHT22 sensors **Pin 2** to Raspberry PI **Pin 7 (GPIO4)**
+- Wire DHT22 sensors **Pin 4** to Raspberry PI **Pin 6 (GND)**
+
 ## Two ways for starting app
 
 Using libraries installed with `pip` instead of `pyenv` shaves time from script startup.
