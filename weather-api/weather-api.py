@@ -37,8 +37,8 @@ def weather():
 
   DB_CONNECTION = sqlite3.connect('../weather-grabber/weather.db')
   cursor = DB_CONNECTION.cursor()
-  start_date = __resolve_date(supplied_date)
-  end_date = __resolve_date(supplied_date) - timedelta(days=1)
+  start_date = __resolve_date(supplied_date) + timedelta(days=1)
+  end_date = start_date - timedelta(days=1)
 
   cursor.execute(WEATHER_QUERY, (end_date, start_date))
   data = cursor.fetchall()
