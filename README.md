@@ -1,5 +1,7 @@
 # Weather-Station
 
+![weather-station-assembled-example](weather-station.jpg "Assembled weather station photo")
+
 Minimal project which will collect temperature/humidity from DHT22 sensors
 and display data inside web browser.
 
