@@ -8,7 +8,7 @@ import bulma from 'bulma'
 const WeatherStation = () => {
   const [state, setState] = useState({selectedDay: new Date(), entries: []})
   const prevStateRef = useRef();
-  const { selectedDay } = state;
+  const { selectedDay, entries } = state;
 
   useEffect(() => {
     if (prevStateRef?.current?.selectedDay != state.selectedDay) {
@@ -22,7 +22,7 @@ const WeatherStation = () => {
     <h1 className="title">Weather Station</h1>
     <DaySelector
       value={selectedDay}
-      onChange={(date) => setState({selectedDay: date, entires: []})}
+      onChange={(date) => setState({selectedDay: date, entries})}
     />
     <WeatherChart weatherEntries={state.entries}/>
   </div>
