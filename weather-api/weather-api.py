@@ -1,5 +1,5 @@
 from datetime import (datetime, timedelta)
-from flask import (Flask, jsonify)
+from flask import (Flask, request, jsonify)
 import sqlite3
 
 app = Flask(__name__)
@@ -25,14 +25,22 @@ class WeatherData:
       'humidity': self.humidity
     }
 
+def __resolve_date(date):
+  if date is not None:
+    return datetime.strptime(date, '%Y-%m-%d')
+  else:
+    return datetime.now()
+
 @app.route('/api/weather', methods=['GET'])
 def weather():
+  supplied_date=request.args.get('date')
+
   DB_CONNECTION = sqlite3.connect('../weather-grabber/weather.db')
   cursor = DB_CONNECTION.cursor()
-  now = datetime.now()
-  yesterday = now - timedelta(days=1)
+  start_date = __resolve_date(supplied_date)
+  end_date = __resolve_date(supplied_date) - timedelta(days=1)
 
-  cursor.execute(WEATHER_QUERY, (yesterday, now))
+  cursor.execute(WEATHER_QUERY, (end_date, start_date))
   data = cursor.fetchall()
   DB_CONNECTION.close()
 
