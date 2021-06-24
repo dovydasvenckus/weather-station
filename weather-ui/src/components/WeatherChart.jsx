@@ -8,9 +8,9 @@ const WeatherChart = ({ weatherEntries }) => {
     if (!!weatherEntries) {
       const temperature = weatherEntries.map(element => ({t: new Date(element.date), y: element.temperature}));
       const humidity = weatherEntries.map(element => ({t: new Date(element.date), y: element.humidity}));
-      console.log(temperature);
+      
       var ctx = document.getElementById('weather-chart').getContext('2d');
-      var chart = new Chart(ctx, {
+      new Chart(ctx, {
         type: 'line',
         data: {
 
