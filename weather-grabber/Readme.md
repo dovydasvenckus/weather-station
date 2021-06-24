@@ -5,16 +5,23 @@ It persists timestamp, temperature and humidity inside **sqlite** database.
 
 ## Two ways for starting app
 
-Using globally installed `pip` library instead of `pyenv` shaves time from script startup. On Raspberry Pi Zero startup time using `pyenv` is around 20 seconds. In projects powered by batteries `pip` should increase battery life, due lower CPU load.
+Using libraries installed with `pip` instead of `pyenv` shaves time from script startup.
+It especially pronounced on Raspberry Pi Zero, it's startup time using `pyenv` is around 20 seconds.
+In projects powered by batteries `pip` should increase battery life, due lower CPU load.
+
+### Prerequisites
+- Python 3
 
 ### Running using pip
 
 - Install pip
-- Run `pip3 install Adafruit_DHT`
+- Run `pip3 install --user Adafruit_DHT`
 - Run `python3 grab-weather.py`
 
 Cron example:
-`*/5 \* \* \* \* cd <PATH_TO_SCRIPT> && /usr/bin/python3 grab-weather.py >> <PATH_TO_LOG>/weather.log 2>&1`
+Add this to local user cron using `crontab -e`:
+PATH_TO_WEATHER_SCRIPT='<PATH_TO_WEATHER_GRABBER_DIRECTORY>'
+`*/5 \* \* \* \* cd $PATH_TO_WEATHER_SCRIPT && /usr/bin/python3 grab-weather.py >> $PATH_TO_WEATHER_SCRIPT/logs/weather.log 2>&1`
 
 ### Running using pypenv
 
