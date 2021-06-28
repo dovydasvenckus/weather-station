@@ -30,8 +30,11 @@ In projects powered by batteries `pip` should increase battery life, due lower C
 
 Cron example:
 Add this to local user cron using `crontab -e`:
+
+```
 PATH_TO_WEATHER_SCRIPT='<PATH_TO_WEATHER_GRABBER_DIRECTORY>'
-`*/5 * * * * cd $PATH_TO_WEATHER_SCRIPT && /usr/bin/python3 grab-weather.py >> $PATH_TO_WEATHER_SCRIPT/logs/weather.log 2>&1`
+*/5 * * * * cd $PATH_TO_WEATHER_SCRIPT && /usr/bin/python3 grab-weather.py >> $PATH_TO_WEATHER_SCRIPT/logs/weather.log 2>&1
+```
 
 ### Running using pypenv
 
@@ -40,4 +43,8 @@ PATH_TO_WEATHER_SCRIPT='<PATH_TO_WEATHER_GRABBER_DIRECTORY>'
 - Run `pipenv run python3 grab-weather.py`
 
 Cron example:
-`\*/5 \* \* \* \* cd <PATH_TO_SCRIPT> && /usr/bin/pipenv run python3 grab-weather.py >> <PATH_TO_LOG>/weather.log 2>&1`
+
+```
+PATH_TO_WEATHER_SCRIPT='<PATH_TO_WEATHER_GRABBER_DIRECTORY>'
+*/5 * * * * cd $PATH_TO_WEATHER_SCRIPT && /usr/bin/pipenv run python3 grab-weather.py >> $PATH_TO_WEATHER_SCRIPT/logs/weather.log 2>&1
+```

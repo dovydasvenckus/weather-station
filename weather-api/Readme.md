@@ -9,8 +9,10 @@ Linux packages which can be installed on debian based systems with `sudo apt-get
 
 ## Install dependencies
 
-`sudo pip3 install flask==2.0.1`
-`sudo pip3 install uwsgi==2.0.19.1`
+```
+sudo pip3 install flask==2.0.1
+sudo pip3 install uwsgi==2.0.19.1
+```
 
 ## Configure systemd service
 
