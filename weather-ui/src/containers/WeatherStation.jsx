@@ -3,6 +3,7 @@ import weatherApi from '../api/weatherApi'
 import WeatherChart from '../components/WeatherChart'
 import DaySelector from '../components/DaySelector';
 import bulma from 'bulma'
+import DayInfo from "../components/DayInfo";
 
 
 const WeatherStation = () => {
@@ -24,6 +25,9 @@ const WeatherStation = () => {
       value={selectedDay}
       onChange={(date) => setState({selectedDay: date, entries})}
     />
+    { state.entries && state.entries.length > 0 && 
+      <DayInfo weatherEntries={state.entries}/> 
+    }
     <WeatherChart weatherEntries={state.entries}/>
   </div>
   )
