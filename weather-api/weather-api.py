@@ -10,6 +10,12 @@ SELECT rowid, * FROM weather
 WHERE date > ? AND ? > date
 """
 
+CURRENT_WEATHER_QUERY = """
+SELECT rowid, * FROM weather
+ORDER BY date DESC
+LIMIT 1
+"""
+
 class WeatherData:
   def __init__(self, id, date, temperature, humidity):
     self.id = id
@@ -31,11 +37,14 @@ def __resolve_date(date):
   else:
     return datetime.now()
 
+def __connect_to_db():
+  return sqlite3.connect('../weather-grabber/weather.db')
+
 @app.route('/api/weather', methods=['GET'])
 def weather():
   supplied_date=request.args.get('date')
 
-  DB_CONNECTION = sqlite3.connect('../weather-grabber/weather.db')
+  DB_CONNECTION = __connect_to_db()
   cursor = DB_CONNECTION.cursor()
   start_date = __resolve_date(supplied_date) + timedelta(days=1)
   end_date = start_date - timedelta(days=1)
@@ -49,6 +58,22 @@ def weather():
   response = jsonify({'weather': mapped_data})
   response.headers.add("Access-Control-Allow-Origin", "*")
   return response
+
+@app.route('/api/weather/current', methods=['GET'])
+def current_weather():
+  DB_CONNECTION = __connect_to_db()
+  cursor = DB_CONNECTION.cursor()
+
+  cursor.execute(CURRENT_WEATHER_QUERY)
+
+  data = cursor.fetchone()
+  DB_CONNECTION.close()
+
+  mapped_data = WeatherData(data[0], data[1], data[2], data[3]).serialize()
+
+  response = jsonify(mapped_data)
+  return response
+
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0')
